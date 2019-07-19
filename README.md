@@ -22,7 +22,7 @@ Shorten a link
 shrtcode.shorten('example.org/very/long/link.html')
 ```
 Return:
-```json
+```js
 {
 　"ok": true,
 　"result": {
@@ -42,7 +42,7 @@ Get infos on a short link by some code
 shrtcode.info('example') 
 ```
 Return:
-```json
+```js
 {
 　"ok": true,
 　"result": {
