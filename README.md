@@ -19,8 +19,11 @@ let shrtcode = require("shrtcode")
 ## Methods:
 Shorten a link
 ```js
-shrtcode.shorten('example.org/very/long/link.html')
+shrtcode.shorten(link)
 ```
+|Argument|Type|Required|Description|
+|-|-|-|-|
+|link|string|true|Link for shorting|
 Return:
 ```js
 {
@@ -41,6 +44,9 @@ Get infos on a short link by some code
 ```js
 shrtcode.info('example') 
 ```
+|Argument|Type|Required|Description|
+|-|-|-|-|
+|code|string|true|Code for info about shorten link|
 Return:
 ```js
 {
