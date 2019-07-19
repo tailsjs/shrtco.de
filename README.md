@@ -2,11 +2,11 @@
 Library for shrtco.de API
 
 # Installing:
-## NPM
+* NPM
 `
 npm install shrtco.de
 `
-## YARN
+* YARN
 `
 yarn add shrtco.de
 `
@@ -17,7 +17,7 @@ let shrtcode = require("shrtcode")
 ```
 
 ## Methods:
-Shorten a link
+* Shorten a link
 ```js
 shrtcode.shorten(link)
 ```
@@ -40,7 +40,7 @@ Return:
 　}
 }
 ```
-Get infos on a short link by some code
+* Get infos on a short link by some code
 ```js
 shrtcode.info('example') 
 ```
