@@ -1,7 +1,7 @@
 # shrtco.de
 Library for shrtco.de API
-
-# Installing:
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9cc6d03e97464f84b80dd87bda36c07e)](https://www.codacy.com/app/tailsjs/shrtco.de?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tailsjs/shrtco.de&amp;utm_campaign=Badge_Grade)
+## Installing:
 * NPM
 `
 npm install shrtco.de
@@ -11,13 +11,13 @@ npm install shrtco.de
 yarn add shrtco.de
 `
 
-# Using:
+## Using
 ```js
 let shrtcode = require("shrtcode") 
 ```
 
-## Methods:
-* Shorten a link
+### Methods
+Shorten a link
 ```js
 shrtcode.shorten(link)
 ```
@@ -40,7 +40,7 @@ Return:
 　}
 }
 ```
-* Get infos on a short link by some code
+Get infos on a short link by some code
 ```js
 shrtcode.info('example') 
 ```

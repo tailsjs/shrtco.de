@@ -1,6 +1,6 @@
 {
   "name": "shrtco.de",
-  "version": "1.0.0",
+  "version": "1.0.1-rc.1",
   "description": "Library for shrtco.de API",
   "main": "index.js",
   "dependencies": {
@@ -15,8 +15,6 @@
     "url": "git+https://github.com/tailsjs/shrtco.de.git"
   },
   "keywords": [
-    "short",
-    "url",
     "shrtcode",
     "shrtco.de",
     "short",

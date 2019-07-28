@@ -1,6 +1,6 @@
-var fetch = require("node-fetch")
-
-class APIError extends Error {/**
+var fetch = require("node-fetch");
+class APIError extends Error {
+/**
 * @param {Object} params - Параметры ошибки
 * @param {Number} params.code - Код ошибки
 * @param {String} params.message - Сообщение ошибки
@@ -31,7 +31,7 @@ async function shorten(firstUrl) {
 	};
 }
 async function info(someCode) {
-	var code = encodeURI(someCode)
+	var code = encodeURI(someCode);
 	var result = (await (await fetch(`https://api.shrtco.de/v2/info?code=${code}`)).json());
 	if (result.ok === true){
 		return result;
@@ -40,9 +40,9 @@ async function info(someCode) {
 			code: "APIERROR",
 			message: result.error
 		});
-	};
-}
+	}
+};
 module.exports = {
 	shorten,
 	info
-}
+};
