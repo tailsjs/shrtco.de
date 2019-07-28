@@ -41,7 +41,7 @@ async function info(someCode) {
 			message: result.error
 		});
 	}
-};
+}
 module.exports = {
 	shorten,
 	info
