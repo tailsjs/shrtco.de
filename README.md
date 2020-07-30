@@ -14,7 +14,7 @@ yarn add shrtco.de
 
 ## Using
 ```js
-let shrtcode = require("shrtcode") 
+let shrtcode = require("shrtco.de") 
 ```
 
 ### Methods
