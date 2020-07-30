@@ -1,14 +1,19 @@
 {
   "name": "shrtco.de",
-  "version": "1.0.1-rc.2",
+  "version": "1.0.2-rc1",
   "description": "Library for shrtco.de API",
   "main": "index.js",
   "dependencies": {
+    "form-data": "^3.0.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "short": "node shorten.js",
+    "info": "node info.js",
+    "customShort": "node customShort.js",
+    "passShort": "node passShort.js",
+    "emojiCode": "node emojiCode.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +24,8 @@
     "shrtco.de",
     "short",
     "url",
-    "api"
+    "api",
+    "shorter"
   ],
   "author": "tailsjs",
   "license": "ISC",

@@ -1,4 +1,5 @@
 var fetch = require("node-fetch");
+var formData = require("form-data");
 class APIError extends Error {
 /**
 * @param {Object} params - Параметры ошибки
@@ -25,11 +26,11 @@ async function shorten(firstUrl) {
 		return result;
 	} else {
 		throw new APIError({
-			code: "APIERROR",
+			code: result.error_code,
 			message: result.error
 		});
 	};
-}
+};
 async function info(someCode) {
 	var code = encodeURI(someCode);
 	var result = (await (await fetch(`https://api.shrtco.de/v2/info?code=${code}`)).json());
@@ -37,12 +38,68 @@ async function info(someCode) {
 		return result;
 	} else {
 		throw new APIError({
-			code: "APIERROR",
+			code: result.error_code,
 			message: result.error
 		});
 	}
+};
+
+async function customShorten(firstUrl, someCode) {
+	var url = encodeURI(firstUrl);
+	var code = encodeURI(someCode);
+	var form = new formData();
+	form.append('url', url) ;
+	form.append('custom_code', code);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
+		method: 'POST', 
+		body: form 
+	})).json());
+	if (result.ok === true) {
+		return result;
+	} else {
+		throw new APIError({
+			code: result.error_code,
+			message: result.error
+		});
+	}
+};
+
+async function emojiCode(firstUrl) {
+	var url = encodeURI(firstUrl);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten?emoji&url=${url}`)).json());
+	if (result.ok === true){
+		return result;
+	} else {
+		throw new APIError({
+			code: result.error_code,
+			message: result.error
+		});
+	};
 }
+
+async function passShort(firstUrl, somePass) {
+	var url = encodeURI(firstUrl);
+	var pass = encodeURI(somePass);
+	var form = new formData();
+	form.append('url', url) ;
+	form.append('password', pass);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
+		method: 'POST', 
+		body: form 
+	})).json());
+	if (result.ok === true) {
+		return result;
+	} else {
+		throw new APIError({
+			code: result.error_code,
+			message: result.error
+		});
+	}
+};
 module.exports = {
 	shorten,
-	info
+	info,
+	customShorten,
+	emojiCode,
+	passShort
 };
