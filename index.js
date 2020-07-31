@@ -32,7 +32,7 @@ async function shorten(firstUrl) {
 			code: result.error_code,
 			message: result.error
 		});
-	};
+	}
 };
 async function info(someCode) {
 	var code = encodeURI(someCode);
