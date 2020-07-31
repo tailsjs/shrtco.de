@@ -33,7 +33,7 @@ async function shorten(firstUrl) {
 			message: result.error
 		});
 	}
-};
+}
 async function info(someCode) {
 	var code = encodeURI(someCode);
 	var result = (await (await fetch(`https://api.shrtco.de/v2/info?code=${code}`)).json());
