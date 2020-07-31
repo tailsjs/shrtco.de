@@ -1,5 +1,5 @@
 var fetch = require("node-fetch");
-var formData = require("form-data");
+var FormData = require("form-data");
 class APIError extends Error {
 /**
 * @param {Object} params - Параметры ошибки
@@ -7,7 +7,10 @@ class APIError extends Error {
 * @param {String} params.message - Сообщение ошибки
 */
 constructor(params) {
-const { code, message } = params;
+const { 
+	code, 
+	message 
+      } = params;
 
 super(message);
 
@@ -47,11 +50,11 @@ async function info(someCode) {
 async function customShorten(firstUrl, someCode) {
 	var url = encodeURI(firstUrl);
 	var code = encodeURI(someCode);
-	var form = new formData();
-	form.append('url', url) ;
-	form.append('custom_code', code);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
-		method: 'POST', 
+	var form = new FormData();
+	form.append("url", url) ;
+	form.append("custom_code", code);
+	var result = (await (await fetch("https://api.shrtco.de/v2/shorten", {
+		method: "POST", 
 		body: form 
 	})).json());
 	if (result.ok === true) {
@@ -80,11 +83,11 @@ async function emojiCode(firstUrl) {
 async function passShort(firstUrl, somePass) {
 	var url = encodeURI(firstUrl);
 	var pass = encodeURI(somePass);
-	var form = new formData();
-	form.append('url', url) ;
-	form.append('password', pass);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
-		method: 'POST', 
+	var form = new FormData();
+	form.append("url", url) ;
+	form.append("password", pass);
+	var result = (await (await fetch("https://api.shrtco.de/v2/shorten", {
+		method: "POST", 
 		body: form 
 	})).json());
 	if (result.ok === true) {
