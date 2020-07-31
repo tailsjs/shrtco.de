@@ -7,15 +7,11 @@ class APIError extends Error {
 * @param {String} params.message - Сообщение ошибки
 */
 constructor(params) {
-const { 
-	code, 
-	message 
-      } = params;
 
-super(message);
+super(params.message);
 
-this.code = code;
-this.message = message;
+this.code = params.code;
+this.message = params.message;
 this.name = this.constructor.name;
 
 Error.captureStackTrace(this, this.constructor);
