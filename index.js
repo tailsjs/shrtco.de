@@ -45,7 +45,7 @@ async function info(someCode) {
 			message: result.error
 		});
 	}
-};
+}
 
 async function customShorten(firstUrl, someCode) {
 	var url = encodeURI(firstUrl);
@@ -65,7 +65,7 @@ async function customShorten(firstUrl, someCode) {
 			message: result.error
 		});
 	}
-};
+}
 
 async function emojiCode(firstUrl) {
 	var url = encodeURI(firstUrl);
@@ -77,7 +77,7 @@ async function emojiCode(firstUrl) {
 			code: result.error_code,
 			message: result.error
 		});
-	};
+	}
 }
 
 async function passShort(firstUrl, somePass) {
@@ -98,7 +98,7 @@ async function passShort(firstUrl, somePass) {
 			message: result.error
 		});
 	}
-};
+}
 module.exports = {
 	shorten,
 	info,
