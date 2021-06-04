@@ -1,36 +1,35 @@
 {
-  "name": "shrtco.de",
-  "version": "1.0.2-rc1",
-  "description": "Library for shrtco.de API",
+  "name": "@tailsjs/ficbook-parser",
+  "version": "1.0.3-rc5",
+  "description": "Парсер фанфиков с ficbook.net",
   "main": "index.js",
   "dependencies": {
-    "form-data": "^3.0.0",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {
-    "short": "node shorten.js",
-    "info": "node info.js",
-    "customShort": "node customShort.js",
-    "passShort": "node passShort.js",
-    "emojiCode": "node emojiCode.js"
+    "start": "exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tailsjs/shrtco.de.git"
+    "url": "git+https://github.com/tailsjs/ficbook-parser.git"
   },
   "keywords": [
-    "shrtcode",
-    "shrtco.de",
-    "short",
-    "url",
-    "api",
-    "shorter"
+    "ficbook",
+    "parser",
+    "фикбук",
+    "книга фанфиков",
+    "фанфик",
+    "api"
   ],
   "author": "tailsjs",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tailsjs/shrtco.de/issues"
+    "url": "https://github.com/tailsjs/ficbook-parser/issues"
   },
-  "homepage": "https://github.com/tailsjs/shrtco.de#readme"
+  "homepage": "https://github.com/tailsjs/ficbook-parser#readme",
+  "typings": "./",
+  "publishConfig": { 
+    "registry": "https://npm.pkg.github.com/" 
+  }
 }
