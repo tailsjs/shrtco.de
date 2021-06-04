@@ -1,5 +1,5 @@
 var fetch = require("node-fetch");
-	MODULE_VERSION = "1.3"
+var formData = require("form-data");
 class APIError extends Error {
 /**
 * @param {Object} params - Параметры ошибки
@@ -18,89 +18,88 @@ this.name = this.constructor.name;
 Error.captureStackTrace(this, this.constructor);
 }
 }
-async function getFic(id, random) {
-	var result = (await (await fetch(`https://ficbook-parser-server-part.herokuapp.com/fanfic?id=${id}${random ? `&random=true` : ""}`)).json())
-	if (result.success === true){
+
+async function shorten(firstUrl) {
+	var url = encodeURI(firstUrl);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`)).json());
+	if (result.ok === true){
 		return result;
 	} else {
 		throw new APIError({
-			code: 1,
-			message: result.error
-		});
-	};	
-};
-async function getChangelogs() {
-	var result = (await (await fetch(`https://ficbook-parser-server-part.herokuapp.com/changelogs`)).json())
-	if (result.success === true){
-		if(result.MODULE.VERSION != MODULE_VERSION){
-			console.log(`Your version of the "ficbook-parser" module is out of date! We ask you to update it. NEW VERSION: ${result.MODULE.VERSION}, YOUR VERSION: ${MODULE_VERSION}`)
-		}
-		return result;
-	} else {
-		throw new APIError({
-			code: 1,
-			message: result.error
-		});
-	};	
-};
-async function getAuthor(id, getComms) {
-	try{
-	var result = (await (await fetch(`https://ficbook-parser-server-part.herokuapp.com/authors?id=${id}${getComms ? `&comments=true` : ""}`)).json());
-	}catch(e){
-		throw new APIError({
-			code: 1,
-			message: "There is no such author!"
-		});	
-	}
-	if (result.success === true){
-		return result;
-	} else {
-		throw new APIError({
-			code: 1,
+			code: result.error_code,
 			message: result.error
 		});
 	};
 };
-async function getFicPart(id, part) {
-	try{
-	var result = (await (await fetch(`https://ficbook-parser-server-part.herokuapp.com/ficparts?id=${id}&part=${part}`)).json());
-	}catch(e){
-		throw new APIError({
-			code: 1,
-			message: "There is no such part!"
-		});	
-	}
-	if (result.success === true){
+async function info(someCode) {
+	var code = encodeURI(someCode);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/info?code=${code}`)).json());
+	if (result.ok === true){
 		return result;
 	} else {
 		throw new APIError({
-			code: 1,
+			code: result.error_code,
 			message: result.error
 		});
-	};
+	}
 };
-async function getRequest(id) {
-	try{
-		var result = (await (await fetch(`https://ficbook-parser-server-part.herokuapp.com/requests?id=${id}`)).json());
-	}catch(e){
-		throw new APIError({
-			code: 1,
-			message: "There is no such request!"
-		});	
-	}
-	if (result.success === true){
+
+async function customShorten(firstUrl, someCode) {
+	var url = encodeURI(firstUrl);
+	var code = encodeURI(someCode);
+	var form = new formData();
+	form.append('url', url) ;
+	form.append('custom_code', code);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
+		method: 'POST', 
+		body: form 
+	})).json());
+	if (result.ok === true) {
 		return result;
 	} else {
 		throw new APIError({
-			code: 1,
+			code: result.error_code,
+			message: result.error
+		});
+	}
+};
+
+async function emojiCode(firstUrl) {
+	var url = encodeURI(firstUrl);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten?emoji&url=${url}`)).json());
+	if (result.ok === true){
+		return result;
+	} else {
+		throw new APIError({
+			code: result.error_code,
 			message: result.error
 		});
 	};
+}
+
+async function passShort(firstUrl, somePass) {
+	var url = encodeURI(firstUrl);
+	var pass = encodeURI(somePass);
+	var form = new formData();
+	form.append('url', url) ;
+	form.append('password', pass);
+	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
+		method: 'POST', 
+		body: form 
+	})).json());
+	if (result.ok === true) {
+		return result;
+	} else {
+		throw new APIError({
+			code: result.error_code,
+			message: result.error
+		});
+	}
 };
 module.exports = {
-	getFic,
-	getAuthor,
-	getChangelogs,
-	getRequest,
-	getFicPart
+	shorten,
+	info,
+	customShorten,
+	emojiCode,
+	passShort
 };

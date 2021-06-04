@@ -1,30 +1,30 @@
 /**
- * Get a fanfiction.
- * @param id Fanfiction ID.
- * @param random Get a random fanfiction. (WITH THIS PARAM, ID DON'T COUNT.)
+ * Shorten link.
+ * @param url URL to short.
  */
-export function getFic(id: number, random?: boolean) : Promise<any>
+ export function shorten(url: string) : Promise<any>
 
-/**
- * Get a module changelogs
- */
-export function getChangelogs() : Promise<any>
-/**
- * Get author info
- * @param id Author ID.
- * @param getComms Retrieving the last 10 author comments.
- */
-export function getAuthor(id: number, getComms: boolean) : Promise<any>
-
-/**
- * Get a request.
- * @param id Request ID.
- */
-export function getRequest(id: number) : Promise<any>
-
-/**
- * Get a fanfiction part.
- * @param id Fanfiction ID.
- * @param part Part of fanfiction.
- */
-export function getFicPart(id: number, part: number) : Promise<any>
+ /**
+  * Get information about link from code.
+  * @param code Link code.
+  */
+ export function info(code: string) : Promise<any>
+ /**
+  * Shorten link with custom code
+  * @param url URL to short.
+  * @param code Your code.
+  */
+ export function customShorten(url: string, code: string) : Promise<any>
+ 
+ /**
+  * Shorten link with emojicode
+  * @param url URL to short.
+  */
+ export function emojiCode(url: string) : Promise<any>
+ 
+ /**
+  * Shorten link with password
+  * @param url URL to short.
+  * @param password Password.
+  */
+ export function passShort(url: string, password: string) : Promise<any>
