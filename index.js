@@ -7,7 +7,10 @@ class APIError extends Error {
 * @param {String} params.message - Сообщение ошибки
 */
 constructor(params) {
-const { code, message } = params;
+const { 
+		code, 
+		message
+ 	  } = params;
 
 super(message);
 
@@ -17,7 +20,7 @@ this.name = this.constructor.name;
 
 Error.captureStackTrace(this, this.constructor);
 }
-}
+};
 
 async function shorten(firstUrl) {
 	var url = encodeURI(firstUrl);
@@ -29,7 +32,7 @@ async function shorten(firstUrl) {
 			code: result.error_code,
 			message: result.error
 		});
-	};
+	}
 };
 async function info(someCode) {
 	var code = encodeURI(someCode);
@@ -48,10 +51,10 @@ async function customShorten(firstUrl, someCode) {
 	var url = encodeURI(firstUrl);
 	var code = encodeURI(someCode);
 	var form = new formData();
-	form.append('url', url) ;
-	form.append('custom_code', code);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
-		method: 'POST', 
+	form.append("url", url);
+	form.append("custom_code", code);
+	var result = (await (await fetch("https://api.shrtco.de/v2/shorten", {
+		method: "POST", 
 		body: form 
 	})).json());
 	if (result.ok === true) {
@@ -74,18 +77,18 @@ async function emojiCode(firstUrl) {
 			code: result.error_code,
 			message: result.error
 		});
-	};
-}
+	}
+};
 
 async function passShort(firstUrl, somePass) {
 	var url = encodeURI(firstUrl);
 	var pass = encodeURI(somePass);
-	var form = new formData();
-	form.append('url', url) ;
-	form.append('password', pass);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten`, {
-		method: 'POST', 
-		body: form 
+	var Form = new formData();
+	Form.append("url", url);
+	Form.append("password", pass);
+	var result = (await (await fetch("https://api.shrtco.de/v2/shorten", {
+		method: "POST", 
+		body: Form 
 	})).json());
 	if (result.ok === true) {
 		return result;
