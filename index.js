@@ -20,7 +20,7 @@ this.name = this.constructor.name;
 
 Error.captureStackTrace(this, this.constructor);
 }
-};
+}
 
 async function short(params) {
 	if (!params.url)throw new APIError({
@@ -38,6 +38,7 @@ async function short(params) {
 		});
 	}
 };
+
 async function info(params) {
 	if (!params.code)throw new APIError({
 		code: -2,
@@ -99,8 +100,7 @@ async function emoji(params) {
 		});
 	}
 };
-/*
-*/
+
 async function pass(params) {
 	if (!params.url)throw new APIError({
 		code: -2,
@@ -128,6 +128,7 @@ async function pass(params) {
 		});
 	}
 };
+
 module.exports = {
 	short,
 	info,
