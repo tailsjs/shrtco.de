@@ -3,10 +3,10 @@ All notable changes to this project will be documented in this file.
  
 ## [1.0.4] - 2021-06-15
 
-## Added
+### Added
 CHANGELOGS.md and METHODS.md
 
-## Updated
+### Updated
 Methods has been shorted.
 
 ```js
@@ -27,12 +27,12 @@ README.md has beed shorted.
 
 ## [1.0.3] - 2021-06-04
 
-## Added
+### Added
 Typings.
 
 ## [1.0.2] - 2020-07-30
 
-## Added
+### Added
 New methods!
 ```js
 shrtcode.customShorten(link, code)
@@ -42,12 +42,12 @@ shrtcode.passShort(link, pass)
 
 ## [1.0.1] - 2019-07-19
 
-## Fixes
+### Fixes
 Fixed README.md
 
 ## [1.0.0] - 2019-07-19
 
-## RELEASE!
+### RELEASE!
 
  <!--
 - [PROJECTNAME-UUUU](http://tickets.projectname.com/browse/PROJECTNAME-UUUU)
