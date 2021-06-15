@@ -1,6 +1,6 @@
 {
   "name": "shrtco.de",
-  "version": "1.0.3-rc.1",
+  "version": "1.0.4",
   "description": "Library for shrtco.de API",
   "main": "index.js",
   "dependencies": {
@@ -9,11 +9,11 @@
   },
   "devDependencies": {},
   "scripts": {
-    "short": "node shorten.js",
-    "info": "node info.js",
-    "customShort": "node customShort.js",
-    "passShort": "node passShort.js",
-    "emojiCode": "node emojiCode.js"
+    "short": "node ./methods_example/short.js",
+    "info": "node ./methods_example/info.js",
+    "custom": "node ./methods_example/custom.js",
+    "pass": "node ./methods_example/pass.js",
+    "emoji": "node ./methods_example/emoji.js"
   },
   "repository": {
     "type": "git",
