@@ -13,7 +13,7 @@ yarn add shrtco.de
 
 ## Using
 ```js
-let scode = require("shrtco.de") 
+const { Shorter, Info } = require("shrtco.de") 
 ```
 
 ## Methods

@@ -1,121 +1,44 @@
-# Methods
-Shorten a link
-```js
-scode.short({ url: "example.com" })
-```
-|Argument|Type|Required|Description|
-|-|-|-|-|
-|url|string|true|Url for shorting|
+# Methods.
 
-Return:
+## How to short?
+* From 2.0, shorter got a whole one method.
 ```js
+const { Shorter } = require("shrtco.de");
+const YOUR_URL = "example.com";
+
+const shrt = new Shorter(YOUR_URL);
+
+const shorted = await shrt.short();
+const shortedWithPassAndEmoji = await shrt.short({
+    pass: "HelloWorld",
+    emoji: true
+});
+const shortedWithPassAndCode = await shrt.short({
+    pass: "HelloWorld",
+    code: "ExampleShortingYooo"
+});
+
+console.log(shorted);
+console.log(shortedWithPassAndEmoji);
+console.log(shortedWithPassAndCode)
+```
+* In params you can set pass, make emojicode or your code.
+```json
 {
-　"ok": true,
-　"result": {
-　　"code": "z2d2o",
-　　"short_link": "shrtco.de/z2d2o",
-　　"full_short_link": "https://shrtco.de/z2d2o",
-　　"short_link2": "9qr.de/z2d2o",
-　　"full_short_link2": "https://9qr.de/z2d2o",
-　　"share_link": "shrtco.de/share/z2d2o",
-　　"full_share_link": "https://shrtco.de/share/z2d2o",
-　　"original_link": "http://example.org/very/long/link.html"
-　}
+    pass: "Here your password.",
+    code: "HereYourCode",
+    emoji: true
 }
 ```
-Get infos on a short link by some code
-```js
-scode.info({ code: "example" }) 
-```
-|Argument|Type|Required|Description|
-|-|-|-|-|
-|code|string|true|Code for info about shorten link|
 
-Return:
+## Ok, how to get info about code?
+* Simple.
 ```js
-{
-　"ok": true,
-　"result": {
-　　"code": "example",
-　　"url": "http://www.example.com/",
-　　"password_protected": false,
-　　"blocked": false,
-　　"created": "2018-05-17 16:46:29",
-　　"timestamp": 1526568389
-　}
-}
-```
-Shorten a link with custom code
-```js
-scode.custom({ url: "example.com", code: "example" }) 
-```
-|Argument|Type|Required|Description|
-|-|-|-|-|
-|url|string|true|Url for shorting|
-|code|string|true|Your code for shorted url|
+const { Info } = require("shrtco.de");
+const YOUR_CODE = "example";
 
-Return:
-```js
-{
-  ok: true,
-  result: {
-    code: 'example',
-    short_link: 'shrtco.de/example',
-    full_short_link: 'https://shrtco.de/example',
-    short_link2: '9qr.de/example',
-    full_short_link2: 'https://9qr.de/example',
-    share_link: 'shrtco.de/share/shrtcode_example767837',
-    full_share_link: 'https://shrtco.de/share/example',
-    original_link: 'http://example.com'
-  }
-}
-```
-Shorten a link by emoji
-```js
-scode.emoji({ url: "example.com" })
-```
-|Argument|Type|Required|Description|
-|-|-|-|-|
-|url|string|true|Url for shorting|
+const info = new Info(YOUR_CODE);
 
-Return:
-```js
-{
-  ok: true,
-  result: {
-    code: '🎥😦',
-    short_link: 'shrtco.de/🎥😦',
-    full_short_link: 'https://shrtco.de/🎥😦',
-    short_link2: '9qr.de/🎥😦',
-    full_short_link2: 'https://9qr.de/🎥😦',
-    share_link: 'shrtco.de/share/🎥😦',
-    full_share_link: 'https://shrtco.de/share/🎥😦',
-    original_link: 'http://example.com'
-  }
-}
+console.log(await info)
 ```
-Shorten a link with password
-```js
-scode.pass({ url: "example.com", pass: "example" }) 
-```
-|Argument|Type|Required|Description|
-|-|-|-|-|
-|url|string|true|Url for shorting|
-|pass|string|true|Your password for shorted url|
-
-Return:
-```js
-{
-  ok: true,
-  result: {
-    code: 'BnNeu',
-    short_link: 'shrtco.de/BnNeu',
-    full_short_link: 'https://shrtco.de/BnNeu',
-    short_link2: '9qr.de/BnNeu',
-    full_short_link2: 'https://9qr.de/BnNeu',
-    share_link: 'shrtco.de/share/BnNeu',
-    full_share_link: 'https://shrtco.de/share/BnNeu',
-    original_link: 'http://example.com'
-  }
-}
-```
+* I wrote that markdown at 3:00pm.

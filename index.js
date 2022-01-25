@@ -1,138 +1,77 @@
-var fetch = require("node-fetch");
-var FormData = require("form-data");
-class APIError extends Error {
-/**
-* @param {Object} params - Параметры ошибки
-* @param {Number} params.code - Код ошибки
-* @param {String} params.message - Сообщение ошибки
-*/
-constructor(params) {
-const { 
-		code, 
-		message
- 	  } = params;
+const fetch = require("node-fetch");
+const FormData = require("form-data");
+const { APIError, ParamError } = require("./errors.js");
+const BASE_URL = "https://api.shrtco.de/v2/";
 
-super(message);
+class Shorter {
+    /**
+     * shrtco.de
+     * 
+     * @param {String} url URL to short.
+     */
+    constructor(url) {
+        if (!url) throw new ParamError({
+            code: 0,
+            message: 'You forgot "URL" argument.'
+        })
+        this.url = encodeURI(url)
+    };
 
-this.code = code;
-this.message = message;
-this.name = this.constructor.name;
+    /**
+     * Shorten link.
+     * 
+     * @param {Object} params? Object with params.
+     * @param {String} params.code? Your code. 
+     * @param {String} params.pass? Your password. 
+     * @param {Boolean} params.emoji? Make code as emoji
+     * @returns {Object} JSON with shorted urls
+     */
+    async short(params) {
+        let form = new FormData();
+        if (params.code) form.append("custom_code", params.code);
+        if (params.pass) form.append("password", params.pass)
+        if (params.code || params.pass) form.append("url", this.url)
+        const result = (await (await fetch(BASE_URL + "shorten" + ((!params.pass && !params.code) ? `?url=` + this.url : "") + (params.emoji ? `${(params.code || params.pass) ? "?" : "&"}emoji` : ""), (params.code || params.pass) ? {
+            method: "POST",
+            body: form
+        } : undefined)).json());
 
-Error.captureStackTrace(this, this.constructor);
+        if (!result.ok) throw new APIError({
+            code: result.error_code,
+            message: result.error
+        });
+
+        return result
+    };
+};
+
+class Info {
+    /**
+     * Get information about link from code.
+     * @param {String} code Link code
+     * @returns {JSON} Info about code.
+     */
+    constructor(code) {
+        if (!code) throw new ParamError({
+            code: 0,
+            message: 'You forgot "code" argument.'
+        })
+        return this.info(encodeURI(code))
+    };
+
+    async info(code) {
+        const result = (await (await fetch(BASE_URL + "info?code=" + code)).json());
+
+        if (!result.ok) throw new APIError({
+            code: result.error_code,
+            message: result.error
+        });
+
+        return result
+    }
 }
-}
-
-async function short(params) {
-	if (!params.url)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"URL\""
-	});
-	var url = encodeURI(params.url);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`)).json());
-	if (result.ok === true){
-		return result;
-	} else {
-		throw new APIError({
-			code: result.error_code,
-			message: result.error
-		});
-	}
-};
-
-async function info(params) {
-	if (!params.code)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"code\""
-	});
-	var code = encodeURI(params.code);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/info?code=${code}`)).json());
-	if (result.ok === true){
-		return result;
-	} else {
-		throw new APIError({
-			code: result.error_code,
-			message: result.error
-		});
-	}
-};
-
-async function custom(params) {
-	if (!params.url)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"url\""
-	});
-	if (!params.code)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"code\""
-	});
-	var url = encodeURI(params.url);
-	var code = encodeURI(params.code);
-	var form = new FormData();
-	form.append("url", url);
-	form.append("custom_code", code);
-	var result = (await (await fetch("https://api.shrtco.de/v2/shorten", {
-		method: "POST", 
-		body: form 
-	})).json());
-	if (result.ok === true) {
-		return result;
-	} else {
-		throw new APIError({
-			code: result.error_code,
-			message: result.error
-		});
-	}
-};
-
-async function emoji(params) {
-	if (!params.url)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"url\""
-	});
-	var url = encodeURI(params.url);
-	var result = (await (await fetch(`https://api.shrtco.de/v2/shorten?emoji&url=${url}`)).json());
-	if (result.ok === true){
-		return result;
-	} else {
-		throw new APIError({
-			code: result.error_code,
-			message: result.error
-		});
-	}
-};
-
-async function pass(params) {
-	if (!params.url)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"url\""
-	});
-	if (!params.pass)throw new APIError({
-		code: -2,
-		message: "You forgot parameter \"pass\""
-	});
-	var url = encodeURI(params.url);
-	var pass = encodeURI(params.pass);
-	var form = new FormData();
-	form.append("url", url);
-	form.append("password", pass);
-	var result = (await (await fetch("https://api.shrtco.de/v2/shorten", {
-		method: "POST", 
-		body: form 
-	})).json());
-	if (result.ok === true) {
-		return result;
-	} else {
-		throw new APIError({
-			code: result.error_code,
-			message: result.error
-		});
-	}
-};
 
 module.exports = {
-	short,
-	info,
-	custom,
-	emoji,
-	pass
-};
+    Shorter,
+    Info
+}

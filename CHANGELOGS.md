@@ -1,6 +1,41 @@
 # Change Log
 All notable changes to this project will be documented in this file.
  
+## [2.0] - 2022-01-26
+
+### Updated
+* FULL MODULE REWRITED!
+* Module now using `class` instead `function`<br>
+Now you need write code be like:
+```js
+const { Shorter, Info } = require("./index.js");
+
+const shrt = new Shorter("example.com");
+const info = new Info("example");
+```
+* Now all shorter methods at one method.
+```js
+// OLD
+scode.short({ url })
+scode.custom({ url, code })
+scode.emoji({ url })
+scode.pass({ url, pass })
+
+// NEW
+shrt.short({ pass, emoji, code })
+```
+* Info method gets small improvement.
+```js
+// OLD
+scode.info({ code })
+
+// NEW
+info = new Info(code);
+return await info
+```
+
+### You still can download old version of module. Just type in console `npm install shrtco.de@1.0.4`
+
 ## [1.0.4] - 2021-06-15
 
 ### Added
@@ -47,7 +82,7 @@ Fixed README.md
 
 ## [1.0.0] - 2019-07-19
 
-### RELEASE!
+## RELEASE!
 
  <!--
 - [PROJECTNAME-UUUU](http://tickets.projectname.com/browse/PROJECTNAME-UUUU)

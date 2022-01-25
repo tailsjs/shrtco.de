@@ -1,6 +1,6 @@
 {
   "name": "shrtco.de",
-  "version": "1.0.4",
+  "version": "2.0.1",
   "description": "Library for shrtco.de API",
   "main": "index.js",
   "dependencies": {
@@ -8,13 +8,6 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "short": "node ./methods_example/short.js",
-    "info": "node ./methods_example/info.js",
-    "custom": "node ./methods_example/custom.js",
-    "pass": "node ./methods_example/pass.js",
-    "emoji": "node ./methods_example/emoji.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tailsjs/shrtco.de.git"
